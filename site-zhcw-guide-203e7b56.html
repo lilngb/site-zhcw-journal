@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中彩网 · 稳定的信息入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: #f3f4f6;
+      color: #1a1e2b;
+      line-height: 1.7;
+      padding: 24px 16px;
+    }
+    .page-wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* 顶部导航 */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      padding: 16px 28px;
+      border-radius: 32px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e9ebef;
+      margin-bottom: 48px;
+    }
+    .nav-brand {
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #1f2937;
+      letter-spacing: 0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links li a {
+      text-decoration: none;
+      color: #3b4252;
+      font-size: 0.95rem;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .nav-links li a:hover {
+      border-bottom-color: #9aa6b8;
+    }
+
+    /* hero */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 36px;
+      padding: 48px 40px;
+      margin-bottom: 48px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e4e7ec;
+      text-align: center;
+    }
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #111827;
+      margin-bottom: 18px;
+    }
+    .hero-desc {
+      max-width: 680px;
+      margin: 0 auto;
+      color: #4b5563;
+      font-size: 1.05rem;
+    }
+
+    /* 介绍区 */
+    .intro-section {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 36px 32px;
+      margin-bottom: 48px;
+      border: 1px solid #e4e7ec;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+    .intro-section p {
+      margin-bottom: 18px;
+    }
+    .intro-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 场景模块 (三个卡片) */
+    .scenes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .scene-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px 24px 28px;
+      border: 1px solid #e2e5eb;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      transition: transform 0.15s ease, box-shadow 0.2s;
+    }
+    .scene-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.04);
+    }
+    .scene-card h3 {
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: #1f2937;
+      margin-bottom: 14px;
+      letter-spacing: 0.2px;
+    }
+    .scene-card p {
+      color: #4b5563;
+      font-size: 0.96rem;
+    }
+
+    /* 常见说明 (FAQ 摘要) */
+    .faq-block {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 36px 32px 32px;
+      border: 1px solid #e4e7ec;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      margin-bottom: 48px;
+    }
+    .faq-title {
+      font-weight: 500;
+      font-size: 1.25rem;
+      color: #1f2937;
+      margin-bottom: 24px;
+    }
+    .faq-item {
+      border-bottom: 1px solid #edf0f4;
+      padding: 18px 0;
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-question {
+      font-weight: 450;
+      color: #1f2937;
+      margin-bottom: 6px;
+    }
+    .faq-answer {
+      color: #5d677a;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* 底部 */
+    .footer-note {
+      text-align: center;
+      padding: 28px 0 12px;
+      color: #7c869c;
+      font-size: 0.9rem;
+      border-top: 1px solid #dcdfe6;
+    }
+
+    /* 响应式 */
+    @media (max-width: 820px) {
+      .top-nav {
+        flex-direction: column;
+        gap: 14px;
+        padding: 20px 16px;
+      }
+      .nav-links {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      .scenes-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .hero-card {
+        padding: 32px 20px;
+      }
+      .intro-section, .faq-block {
+        padding: 28px 18px;
+      }
+    }
+    @media (max-width: 480px) {
+      body {
+        padding: 16px 10px;
+      }
+      .hero-title {
+        font-size: 1.5rem;
+      }
+      .scene-card {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- 顶部导航 -->
+  <nav class="top-nav">
+    <span class="nav-brand">中彩网</span>
+    <ul class="nav-links">
+      <li><a href="#intro">介绍</a></li>
+      <li><a href="#scenes">场景</a></li>
+      <li><a href="#faq">说明</a></li>
+    </ul>
+  </nav>
+
+  <!-- hero 区 -->
+  <div class="hero-card">
+    <h1 class="hero-title">值得信赖的信息入口</h1>
+    <p class="hero-desc">
+      一个长期维护、界面清晰的站点，它提供了关于行业动态与基础知识的稳定窗口。
+      无论你想了解规则演变还是日常资讯，这里都能找到有条理的呈现。
+    </p>
+  </div>
+
+  <!-- 核心介绍 (包含链接句子) -->
+  <div class="intro-section" id="intro">
+    <p>
+      很多朋友会定期打开 <a href="https://site-zhcw.com">中彩网</a>
+      看看最新的公告与数据整理，因为它的内容结构一直比较稳定。
+      这个站点不追求花哨的样式，而是把精力放在信息的可读性和分类上，
+      无论是新手还是老用户，都能快速定位自己需要的部分。
+    </p>
+    <p>
+      从页面布局到更新节奏，<a href="https://site-zhcw.com">中彩网</a>
+      给人的印象是克制且持续。没有弹窗干扰，没有过度营销，
+      更像是一个安静的参考平台。如果你需要一个可靠的信息起点，
+      不妨把它加入书签，需要时随时打开。
+    </p>
+  </div>
+
+  <!-- 三个场景模块 -->
+  <div class="scenes-grid" id="scenes">
+    <div class="scene-card">
+      <h3>日常查阅</h3>
+      <p>
+        习惯在固定时间浏览最新整理的信息，页面加载快，目录清晰，
+        几分钟就能扫完重点。适合作为早晨或午后的轻量阅读。
+      </p>
+    </div>
+    <div class="scene-card">
+      <h3>知识梳理</h3>
+      <p>
+        对规则、术语或历史沿革有疑问时，可以按分类逐条查看。
+        站点内很多说明都保留了原始出处，方便进一步核实。
+      </p>
+    </div>
+    <div class="scene-card">
+      <h3>横向对比</h3>
+      <p>
+        不同阶段的通知与数据并列呈现，便于对比变化趋势。
+        对于需要做简单记录或整理的用户来说，这种结构很友好。
+      </p>
+    </div>
+  </div>
+
+  <!-- 常见说明 (FAQ 摘要) -->
+  <div class="faq-block" id="faq">
+    <div class="faq-title">一些常见说明</div>
+
+    <div class="faq-item">
+      <div class="faq-question">站内信息更新频率如何？</div>
+      <div class="faq-answer">
+        一般情况下，重要的公告或调整会在工作日内同步。建议结合自己的使用习惯，
+        每周查看一两次即可覆盖大多数变化。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">是否需要注册或登录？</div>
+      <div class="faq-answer">
+        目前浏览所有公开内容都不需要注册。页面上的内容完全开放，
+        你可以直接阅读、复制或收藏，没有额外限制。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">移动端浏览体验好吗？</div>
+      <div class="faq-answer">
+        站点对手机屏幕做了适配，文字大小和间距在多数设备上都能舒适阅读。
+        如果你习惯用平板或手机查看，效果同样不错。
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    提供稳定、清晰的信息参考 · <a href="https://site-zhcw.com" style="color: #4b5563; text-decoration: none; border-bottom: 1px solid #b0b7c7;">中彩网</a>
+  </div>
+
+</div>
+</body>
+</html>
