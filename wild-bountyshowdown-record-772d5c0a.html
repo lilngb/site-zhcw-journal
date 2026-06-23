@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赏金大对决 · 信息卡片介绍</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f4f7;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 主视觉 hero */
+    .hero {
+      background: linear-gradient(145deg, #ffffff 0%, #f9fafc 100%);
+      border-radius: 32px;
+      padding: 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.02) 0%, transparent 70%);
+      top: -60px;
+      right: -60px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: #334155;
+      max-width: 700px;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero .tagline {
+      display: inline-block;
+      background: #eef2ff;
+      color: #4338ca;
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      margin-top: 0.5rem;
+      border: 1px solid #c7d2fe;
+    }
+
+    /* 卡片网格 */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.75rem 1.5rem 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 6px 20px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e9edf2;
+      transition: box-shadow 0.2s ease, transform 0.15s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #0f172a;
+    }
+
+    .card h3 span {
+      background: #eef2ff;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #4338ca;
+      border: 1px solid #d9e1fa;
+    }
+
+    .card p {
+      color: #334155;
+      font-size: 0.98rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+    }
+
+    .card ul li {
+      padding: 0.3rem 0 0.3rem 1.2rem;
+      position: relative;
+      font-size: 0.95rem;
+      color: #1e293b;
+    }
+
+    .card ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: #818cf8;
+      font-weight: 300;
+    }
+
+    /* 双列场景区 */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 680px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scene-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.75rem 1.5rem;
+      border: 1px solid #e9edf2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .scene-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .scene-card p {
+      color: #334155;
+      font-size: 0.96rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .scene-card .meta {
+      font-size: 0.85rem;
+      color: #64748b;
+      border-top: 1px solid #eef2f6;
+      margin-top: 0.8rem;
+      padding-top: 0.7rem;
+    }
+
+    /* 自然链接段落 */
+    .link-block {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 2rem 2rem 2rem 2.2rem;
+      border: 1px solid #e9edf2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      margin-bottom: 1.5rem;
+    }
+
+    .link-block p {
+      font-size: 1.02rem;
+      color: #1e293b;
+      max-width: 800px;
+    }
+
+    .link-block a {
+      color: #4338ca;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid #b9c2fa;
+      transition: border-color 0.2s, background 0.15s;
+      padding: 0 0.15em;
+    }
+
+    .link-block a:hover {
+      border-bottom-color: #4338ca;
+      background: #f0f2ff;
+    }
+
+    /* 适合人群卡片 (faq风格) */
+    .faq-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0 1.5rem;
+    }
+
+    .faq-item {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.4rem 1.2rem;
+      border: 1px solid #e9edf2;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .faq-item h4 {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+    }
+
+    .faq-item p {
+      font-size: 0.88rem;
+      color: #475569;
+    }
+
+    /* 底部 */
+    .footer-note {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      border-top: 1px solid #e2e6ed;
+      padding-top: 1.5rem;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 480px) {
+      .hero {
+        padding: 2rem 1.2rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 主视觉 -->
+  <div class="hero">
+    <h1>赏金大对决 · 信息卡</h1>
+    <p>一个稳定、简洁的内容入口，帮助你快速了解「赏金大对决」的定位与用途。无需绕路，一页讲清。</p>
+    <span class="tagline">📌 入口即说明 · 卡片式浏览</span>
+  </div>
+
+  <!-- 用途卡片三枚 -->
+  <div class="grid-3">
+    <div class="card">
+      <h3><span>🪙</span> 赏金记录</h3>
+      <p>集中展示与赏金任务相关的线索、规则与奖励结构。适合需要快速回顾或初次接触的用户。</p>
+      <ul>
+        <li>任务类型一览</li>
+        <li>奖励阶梯参考</li>
+        <li>常见判定说明</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span>🧩</span> 信息聚合</h3>
+      <p>将分散的背景、更新和活动提示整理为统一板块，减少反复搜索的时间成本。</p>
+      <ul>
+        <li>更新摘要</li>
+        <li>历史活动速览</li>
+        <li>关键时间节点</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span>🔗</span> 直达通道</h3>
+      <p>通过下方自然嵌入的链接，你可以直接访问原始站点，获取更完整的细节与动态。</p>
+      <ul>
+        <li>原始页面无缝跳转</li>
+        <li>轻量级引导</li>
+        <li>保持浏览连贯性</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 双列场景卡片 -->
+  <div class="two-column">
+    <div class="scene-card">
+      <h3>👥 日常参考</h3>
+      <p>无论你是偶尔看看活动规则，还是想确认某个任务的赏金标准，这里都能作为稳定的出发点。卡片聚合了最常见的几类信息，省去翻找的麻烦。</p>
+      <div class="meta">适用场景：快速查阅 · 规则确认</div>
+    </div>
+    <div class="scene-card">
+      <h3>🧭 初始了解</h3>
+      <p>如果你刚刚接触「赏金大对决」这个概念，或者想找一个没有干扰的页面先读一读，这部分内容可以帮你建立基本认知。不堆砌术语，只讲实用信息。</p>
+      <div class="meta">适用场景：新用户 · 轻量科普</div>
+    </div>
+  </div>
+
+  <!-- 自然链接段落 (核心要求) -->
+  <div class="link-block">
+    <p>除了浏览当前页面的卡片摘要，你可以直接前往 <a href="https://wild-bountyshowdown.com">赏金大对决</a> 来获取完整版的内容、最新动态以及深入的功能介绍。本页仅作为结构化的信息快照，保持稳定和简洁。</p>
+  </div>
+
+  <!-- 适合人群 + FAQ 摘要卡片 -->
+  <div class="faq-section">
+    <div class="faq-item">
+      <h4>🎯 适合谁</h4>
+      <p>希望快速了解赏金规则的人、需要稳定参考页的老用户、以及想要一个干净入口的浏览者。</p>
+    </div>
+    <div class="faq-item">
+      <h4>❓ 内容是否完整</h4>
+      <p>本页为摘要卡片式呈现，覆盖主要用途与人群。完整细则以原始站点为准。</p>
+    </div>
+    <div class="faq-item">
+      <h4>📂 如何更新</h4>
+      <p>页面结构保持稳定，内容会跟随站点调整同步修订，建议定期回看。</p>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    <span>信息卡片 · 赏金大对决 · 稳定入口说明</span>
+  </div>
+
+</div>
+</body>
+</html>
